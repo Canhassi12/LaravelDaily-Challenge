@@ -14,32 +14,40 @@
             </div>
         </div>
     </div>
-
     <div class="flex flex-row justify-center gap-20">
-        <form class="bg-white flex flex-col justify-evenly shadow-md rounded px-8 pt-6 pb-8 mb-4 max-h-fit">
+        <form action="{{route('company.store')}}" method="POST" class="bg-white flex flex-col justify-evenly shadow-md rounded px-8 pt-6 pb-8 mb-4 max-h-fit">
+            @isset($messages)
+                <h3 class="text-red-500">{{ $messages }}</h3>
+            @endisset
+
+            @isset($response)
+                 <h3 class="bg-green-400 max-w-fit">{{ $response }}</h3>
+            @endisset
+            
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="companyname">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
                     Company name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="companyname" type="text" placeholder="Company name">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" type="text" placeholder="Company name">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
                     Email
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="text" placeholder="Email">
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="logo">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
                     Logo
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="logo" type="text" placeholder="Logo">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="logo" type="text" placeholder="Logo">
             </div>
             <div class="flex items-center justify-center">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Register company
                 </button>
             </div>
+            @csrf
         </form>
             
             
@@ -83,6 +91,7 @@
                     Register Employee
                 </button>
             </div>
+            @csrf
         </form>
     </div>
         <p class="text-center text-gray-500 text-xs">
