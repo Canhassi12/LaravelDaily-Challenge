@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,11 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/company', [CompanyController::class, 'index'])->name('company');
+Route::post('/company', [CompanyController::class, 'store'])->name('company.store');
 
-Route::post('/', [CompanyController::class, 'store'])->name('company.store');
+Route::get('/employee', [EmployeeController::class, 'index'])->name('employee');
+Route::post('/employee', [EmployeeController::class, 'store'])->name('employee.store');
+
 
 
