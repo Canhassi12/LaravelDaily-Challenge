@@ -13,15 +13,40 @@
             <h3 class="text-red-500">{{ $messages }}</h3>
         @endisset
 
-        @isset($response)
-            <h3 class="bg-green-400 max-w-fit h-2">{{ $response }}</h3>
+        @isset($error)
+            <h3 class="text-red-500">{{ $error }}</h3>
         @endisset
 
-        <x-company-form>
-    
+        @isset($response)
+            <h3 class="bg-green-400 max-w-fit h-6">{{ $response }}</h3>
+        @endisset
+        
+        <div class="flex flex-col">
+            <x-company-form>
+        
 
-        </x-company-form>
+            </x-company-form>
+            <div>
+                @isset($companies) 
+                    <table class="table-auto">
+                        <tr>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <th>logotipo</th>
+                        </tr>
+                        
+                        @foreach ($companies as $company)
+                            <tr>
+                                <td class="text-center border p-1"> {{ $company->name }}</td>
+                                <td class="text-center border p-1">{{ $company->email }}</td>
+                                <td class="text-center border  p-1">{{ $company->logotipo}}</td>
+                            </tr>
+                        @endforeach 
+                    </table>
+                    {{ $companies->links() }}                   
+                @endisset         
+            </div>
+        </div>
     </div>
- 
 </body>
 </html>

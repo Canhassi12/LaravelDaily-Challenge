@@ -6,6 +6,7 @@ use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +15,7 @@ class CompanyController extends Controller
     
     public function index()
     {
-        return view('company');
+        return view('company', ['companies' => DB::table('companies')->paginate(10)]);
     }
 
     
@@ -35,7 +36,7 @@ class CompanyController extends Controller
         if ($validator->fails()) {
             $messages = $validator->getMessageBag()->first();
 
-            return response()->view('dashboard', compact('messages'), Response::HTTP_FORBIDDEN);
+            return response()->view('company', compact('messages'), Response::HTTP_FORBIDDEN);
         }
 
         $inputs = $request->all();
@@ -49,16 +50,16 @@ class CompanyController extends Controller
         try {
             $company = Company::create($company);
     
-            return response()->view('dashboard', ['response' => 'The company has been added with sucessful'], Response::HTTP_OK);
+            return redirect('/company');
         } catch (Exception $error) {
-            return response()->json($error, Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->view('company', ['error' => 'invalid or existing company'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)
