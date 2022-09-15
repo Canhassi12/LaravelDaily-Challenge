@@ -6,7 +6,9 @@ use App\Models\Company;
 use App\Models\Employee;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use LDAP\Result;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeController extends Controller
@@ -14,7 +16,7 @@ class EmployeeController extends Controller
    
     public function index()
     {
-        return view('employee');
+        return view('employee', ['employees' => DB::table('employees')->paginate(10)]);
     }
 
     
@@ -42,6 +44,8 @@ class EmployeeController extends Controller
 
         $inputs = $request->all();
 
+        // dd((int)$inputs['company']);
+
         $employee = [
             'first_name' => $inputs['firstname'],
             'last_name' => $inputs['lastname'],
@@ -52,10 +56,10 @@ class EmployeeController extends Controller
         
         try {
             $employee = Employee::create($employee);
-            return response()->view('employee', ['response' => 'The company has been added with sucessful'], Response::HTTP_OK);
-            
+            return redirect('/employee');        
         } catch (Exception $error) {
-            return response()->json($error, Response::HTTP_INTERNAL_SERVER_ERROR);
+            dd($error);
+            return response()->view('employee', ['error' => 'invalid or existing company'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
