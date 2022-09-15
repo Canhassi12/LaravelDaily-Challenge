@@ -16,7 +16,10 @@ class EmployeeController extends Controller
    
     public function index()
     {
-        return view('employee', ['employees' => DB::table('employees')->paginate(10)]);
+        return view('employee', [
+            'employees' => DB::table('employees')->paginate(10),
+            'companies' => DB::table('companies')->get(),
+        ]);
     }
 
     
@@ -44,7 +47,6 @@ class EmployeeController extends Controller
 
         $inputs = $request->all();
 
-        // dd((int)$inputs['company']);
 
         $employee = [
             'first_name' => $inputs['firstname'],
