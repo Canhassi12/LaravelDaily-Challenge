@@ -9,11 +9,6 @@
 </head>
 <body>
     <div class="flex justify-center mt-20">
-        <x-employee-form>
-    
-
-        </x-employee-form>
-
         @isset($messages)
             <h3 class="text-red-500">{{ $messages }}</h3>
         @endisset
@@ -21,9 +16,38 @@
         @isset($response)
             <h3 class="bg-green-400 max-w-fit h-6">{{ $response }}</h3>
         @endisset
-        
+
+        @isset($error)
+            <h3 class="text-red-500">{{ $error }}</h3>
+        @endisset
+        <x-employee-form>
+    
+
+        </x-employee-form>
+
+        <div>
+            @isset($employees) 
+                <table class="table-auto">
+                    <tr>
+                        <th>Company</th>
+                        <th>Email</th>
+                        <th>logotipo</th>
+                    </tr>
+                    
+                    @foreach ($employees as $employee)
+                        <tr>
+                            <td class="text-center border p-1"> {{ $employee->first_name }} {{$employee->last_name}}</td>
+                            <td class="text-center border p-1">{{ $employee->email }}</td>
+                            <td class="text-center border  p-1">{{ $employee->number}}</td>
+                            <td class="text-center border  p-1">{{ $employee->company_id}}</td>
+
+                        </tr>
+                    @endforeach 
+                </table>
+                {{ $employees->links() }}                   
+            @endisset         
+        </div>
     </div>
- 
 </body>
 </html>
 
