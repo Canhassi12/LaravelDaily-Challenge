@@ -20,18 +20,16 @@
         @isset($error)
             <h3 class="text-red-500">{{ $error }}</h3>
         @endisset
-        <x-employee-form>
-    
-
-        </x-employee-form>
+        <x-employee-form :companies="$companies"/>
 
         <div>
             @isset($employees) 
                 <table class="table-auto">
-                    <tr>
-                        <th>Company</th>
+                    <tr class="ml-2">
+                        <th>Name</th>
                         <th>Email</th>
-                        <th>logotipo</th>
+                        <th>Number</th>
+                        <th>Company id</th>
                     </tr>
                     
                     @foreach ($employees as $employee)
@@ -39,8 +37,7 @@
                             <td class="text-center border p-1"> {{ $employee->first_name }} {{$employee->last_name}}</td>
                             <td class="text-center border p-1">{{ $employee->email }}</td>
                             <td class="text-center border  p-1">{{ $employee->number}}</td>
-                            <td class="text-center border  p-1">{{ $employee->company_id}}</td>
-
+                            <td class="text-center border  p-1">{{ $employee->company_id }}</td>
                         </tr>
                     @endforeach 
                 </table>

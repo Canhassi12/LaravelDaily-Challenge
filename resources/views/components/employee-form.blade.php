@@ -26,9 +26,9 @@
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Choose company:</label>
         <select name="company" id="">
-            <option value="1">fodase</option>
-            <option value="2">fodas1e</option>
-            <option value="3">fodas21e</option>
+            @foreach($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->name }} ID: {{ $company->id }}</option>
+            @endforeach
         </select>
 
     </div>
