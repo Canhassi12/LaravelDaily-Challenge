@@ -40,6 +40,11 @@
                                 <td class="text-center border p-1"> {{ $company->name }}</td>
                                 <td class="text-center border p-1">{{ $company->email }}</td>
                                 <td class="text-center border  p-1">{{ $company->logotipo}}</td>
+                                <td class="text-center border p-1">
+                                    <a href="{{route('company.edit', $company->id) }}">
+                                        <button class="text-blue-500 hover:text-blue-900">edit</button>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach 
                     </table>

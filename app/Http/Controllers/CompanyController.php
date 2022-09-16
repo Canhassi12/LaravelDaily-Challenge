@@ -17,13 +17,6 @@ class CompanyController extends Controller
     {
         return view('company', ['companies' => DB::table('companies')->paginate(10)]);
     }
-
-    
-    public function create()
-    {
-        //
-    }
-
     
     public function store(Request $request)
     {
@@ -56,20 +49,20 @@ class CompanyController extends Controller
         }
     }
 
-    
-    public function show($id)
+    public function edit(Company $company)
     {
+        return view('edit-company', compact('company'));
+    }
+
+    public function update(Request $request, Company $company)
+    {
+        $inputs = $request->except(['_token', '_method']);
         
-    }
+        $company->fill(collect($inputs)->toArray());
 
-    public function edit($id)
-    {
-        //
-    }
+        $company->save();
 
-    public function update(Request $request, $id)
-    {
-        //
+        return redirect('/company');
     }
 
     public function destroy($id)
