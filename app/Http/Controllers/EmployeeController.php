@@ -8,12 +8,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use LDAP\Result;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeController extends Controller
 {
-   
     public function index()
     {
         return view('employee', [
@@ -22,13 +20,6 @@ class EmployeeController extends Controller
         ]);
     }
 
-    
-    public function create()
-    {
-        //
-    }
-
-    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -64,14 +55,7 @@ class EmployeeController extends Controller
             return response()->view('employee', ['error' => 'invalid or existing company'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-   
+ 
     public function edit($id)
     {
         //
