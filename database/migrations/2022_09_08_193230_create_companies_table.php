@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->require();
             $table->string('email')->unique();
-            $table->string('logotipo');
+            $table->string('logotipo')->require();
             $table->timestamps();
         });
     }

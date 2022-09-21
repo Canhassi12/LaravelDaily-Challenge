@@ -5,9 +5,11 @@
     'id'
 ])
 
-<form @isset($email) action="{{ route('company.update', $id) }}" method="POST" @endisset action="{{ route('company.store') }}" method="" class="bg-white flex flex-col justify-evenly shadow-md rounded px-8 pt-6 pb-8 mb-4 max-h-fit">
+<form @isset($email) action="{{ route('company.update', $id) }}" method="POST" @endisset action="{{ route('company.store') }}" method="POST" class="bg-white flex flex-col justify-evenly shadow-md rounded px-8 pt-6 pb-8 mb-4 max-h-fit">
     <div class="mb-4">
-        <input type="hidden" name="_method" value="PUT">
+        @isset($email)
+            <input type="hidden" name="_method" value="PUT"> 
+        @endisset
         <label class="block text-gray-700 text-sm font-bold mb-2">
             Company name
         </label>
