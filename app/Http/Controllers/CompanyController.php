@@ -23,7 +23,7 @@ class CompanyController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|',
             'email' => 'required|string',
-            'logo' => 'required',
+            'logotipo' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -37,7 +37,7 @@ class CompanyController extends Controller
         $company = [
             'name' => $inputs['name'],
             'email' => $inputs['email'],
-            'logotipo' => $inputs['logo'],
+            'logotipo' => $inputs['logotipo'],
         ];
         
         try {
