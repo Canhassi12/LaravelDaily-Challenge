@@ -20,6 +20,7 @@
         @isset($error)
             <h3 class="text-red-500">{{ $error }}</h3>
         @endisset
+
         <x-employee-form :companies="$companies"/>
 
         <div>
@@ -38,6 +39,11 @@
                             <td class="text-center border p-1">{{ $employee->email }}</td>
                             <td class="text-center border  p-1">{{ $employee->number}}</td>
                             <td class="text-center border  p-1">{{ $employee->company_id }}</td>
+                            <td class="text-center border p-1">
+                                <a href="{{route('employee.edit', $employee->id) }}">
+                                    <button class="text-blue-500 hover:text-blue-900">edit</button>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach 
                 </table>

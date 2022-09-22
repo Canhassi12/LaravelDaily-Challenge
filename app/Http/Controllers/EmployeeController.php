@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class EmployeeController extends Controller
 {
     public function index()
-    {
+    { 
         return view('employee', [
             'employees' => DB::table('employees')->paginate(10),
             'companies' => DB::table('companies')->get(),
@@ -56,15 +56,21 @@ class EmployeeController extends Controller
         }
     }
  
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        //
+        return view('edit-employee', ['employee' => $employee, 'companies' => DB::table('companies')->get()]);
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request, Employee $employee)
     {
-        //
+        $inputs = $request->except(['_token', '_method']);
+        
+        $employee->fill(collect($inputs)->toArray());
+
+        $employee->save();
+
+        return redirect('/employee');
     }
 
     
