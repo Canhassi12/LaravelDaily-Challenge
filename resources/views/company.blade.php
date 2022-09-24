@@ -45,6 +45,15 @@
                                         <button class="text-blue-500 hover:text-blue-900">edit</button>
                                     </a>
                                 </td>
+                                <td class="text-center border p-1"> 
+                                   <form action="{{ route('company.delete', $company->id) }}" method="POST">
+                                        @csrf
+                                        <input class="hidden" name="_method" value="DELETE">
+                                        <button class="text-blue-500 hover:text-blue-900">delete</button>
+                                    </form> 
+                                </td>
+                    
+                                
                             </tr>
                         @endforeach 
                     </table>

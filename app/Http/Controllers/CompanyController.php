@@ -67,6 +67,8 @@ class CompanyController extends Controller
 
     public function destroy($id)
     {
-        //
+        Company::where('id', $id)->delete();
+        
+        return redirect('/company');
     }
 }

@@ -24,10 +24,10 @@
         <input @isset($lastname) value={{$lastname}} @endisset class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="last_name" type="text" placeholder="LastName">
     </div>
     <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2">
+        <label @isset($email) class="hidden" @endisset class="block text-gray-700 text-sm font-bold mb-2">
             Email
         </label>
-        <input @isset($email) value={{$email}} @endisset class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="text" placeholder="Email">
+        <input @isset($email) value={{$email}} class="hidden" @endisset class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="text" placeholder="Email">
     </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">

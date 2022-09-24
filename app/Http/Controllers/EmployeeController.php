@@ -23,36 +23,35 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string',
             'number' => 'required|string',
-            'company' => 'required|string',
+            'company_id' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             $messages = $validator->getMessageBag()->first();
 
-            return response()->view('employee', compact('messages'), Response::HTTP_FORBIDDEN);
+            return response()->view('employee', ['messages' => $messages, 'companies' =>  DB::table('companies')->get()], Response::HTTP_FORBIDDEN);
         }
 
         $inputs = $request->all();
 
 
         $employee = [
-            'first_name' => $inputs['firstname'],
-            'last_name' => $inputs['lastname'],
+            'first_name' => $inputs['first_name'],
+            'last_name' => $inputs['last_name'],
             'email' => $inputs['email'],
             'number' => $inputs['number'],
-            'company_id' => (int)$inputs['company'],
+            'company_id' => (int)$inputs['company_id'],
         ];
         
         try {
             $employee = Employee::create($employee);
             return redirect('/employee');        
         } catch (Exception $error) {
-            dd($error);
-            return response()->view('employee', ['error' => 'invalid or existing company'], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->view('employee', ['error' => 'invalid or existing company', 'companies' =>  DB::table('companies')->get()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
  
@@ -76,6 +75,8 @@ class EmployeeController extends Controller
     
     public function destroy($id)
     {
-        //
+        Employee::where('id', $id)->delete();
+        
+        return redirect('/employee');
     }
 }
