@@ -14,18 +14,21 @@
             Company name
         </label>
         <input @isset($name) value={{$name}} @endisset  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="name" type="text" placeholder="Company name">
+        @if($errors->has('name')) <h3 class="text-red-500">{{$errors->first('name')}}</h3> @endif
     </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">
             Email
         </label>
         <input @isset($email) value={{$email}} @endisset class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="email" type="text" placeholder="Email">
+        @if($errors->has('email')) <h3 class="text-red-500">{{$errors->first('email')}}</h3> @endif
     </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">
             Logo
         </label>
         <input @isset($logo) value={{$logo}} @endisset class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="logotipo" type="text" placeholder="Logo">
+        @if($errors->has('logotipo')) <h3 class="text-red-500">{{$errors->first('logotipo')}}</h3> @endif
     </div>
     <div class="flex items-center justify-center">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

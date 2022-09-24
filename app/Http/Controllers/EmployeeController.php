@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeStoreRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
 use App\Models\Company;
 use App\Models\Employee;
 use Exception;
@@ -20,38 +22,16 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(EmployeeStoreRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => 'required|string',
-            'number' => 'required|string',
-            'company_id' => 'required|string',
-        ]);
+        $employee = $request->all();
 
-        if ($validator->fails()) {
-            $messages = $validator->getMessageBag()->first();
-
-            return response()->view('employee', ['messages' => $messages, 'companies' =>  DB::table('companies')->get()], Response::HTTP_FORBIDDEN);
-        }
-
-        $inputs = $request->all();
-
-
-        $employee = [
-            'first_name' => $inputs['first_name'],
-            'last_name' => $inputs['last_name'],
-            'email' => $inputs['email'],
-            'number' => $inputs['number'],
-            'company_id' => (int)$inputs['company_id'],
-        ];
-        
         try {
             $employee = Employee::create($employee);
+
             return redirect('/employee');        
         } catch (Exception $error) {
-            return response()->view('employee', ['error' => 'invalid or existing company', 'companies' =>  DB::table('companies')->get()], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->view('employee', ['error' => 'invalid or existing employee', 'companies' =>  DB::table('companies')->get()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
  
@@ -61,7 +41,7 @@ class EmployeeController extends Controller
     }
 
    
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeUpdateRequest $request, Employee $employee)
     {
         $inputs = $request->except(['_token', '_method']);
         
