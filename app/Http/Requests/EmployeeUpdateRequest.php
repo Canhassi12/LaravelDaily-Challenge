@@ -26,6 +26,7 @@ class EmployeeUpdateRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'email' => "required|string|email|unique:employees,email,{$this->employee->id}",
             'number' => 'required|integer',
             'company_id' => 'required|string'
         ];

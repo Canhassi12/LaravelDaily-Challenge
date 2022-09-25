@@ -27,7 +27,7 @@ class CompanyUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|',
-            'email' => 'required|email|unique:companies',
+            'email' => "required|string|email|unique:companies,email,{$this->company->id}",
             'logotipo' => 'required',
         ];
     }
