@@ -46,7 +46,7 @@
                                 </a>
                             </td>
                             <td class="text-center border p-1">
-                                <form action="{{ route('employee.delete', $employee->id) }}" method="POST">
+                                <form action="{{ route('employee.destroy', $employee->id) }}" method="POST">
                                     @csrf
                                     <input class="hidden" name="_method" value="DELETE">
                                     <button class="text-blue-500 hover:text-blue-900">delete</button>
