@@ -15,8 +15,7 @@ LaravelDaily-Challenge`;
 10. The login its: email:`admin@admin.com`, password:`password`;
 
 ## 💻​ 
-
+https://user-images.githubusercontent.com/80018897/192386191-34b9de4b-5205-4bdf-94ae-d600510efd06.mp4
 
 
 Made by  [Canhassi](https://github.com/Canhassi12) <3
-
