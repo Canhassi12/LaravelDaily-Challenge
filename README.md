@@ -10,8 +10,9 @@ LaravelDaily-Challenge`;
 5. Run database migrate: `php artisan migrate`;
 6. Load css: `npm run dev`;
 7. populate your database: `php artisan db:seed`;
-7. Run project: `php artisan serve`; 
-8. Open your browser in local host server: `http://127.0.0.1:####/`; 
+8. Run project: `php artisan serve`; 
+9. Open your browser in local host server: `http://127.0.0.1:####/`; 
+10. The login its: email:`admin@admin.com`, password:`password`;
 
 ## 💻​ 
 
