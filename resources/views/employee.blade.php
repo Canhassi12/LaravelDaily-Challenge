@@ -14,10 +14,6 @@
         </button>    
     </a>
     <div class="flex justify-center mt-20">
-        @isset($messages)
-            <h3 class="text-red-500">{{ $messages }}</h3>
-        @endisset
-
         @isset($response)
             <h3 class="bg-green-400 max-w-fit h-6">{{ $response }}</h3>
         @endisset

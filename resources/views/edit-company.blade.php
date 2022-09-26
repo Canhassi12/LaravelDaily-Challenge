@@ -8,6 +8,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    <a href="http://127.0.0.1:8000/">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
+            Dashboard
+        </button>    
+    </a>
     @isset($messages)
         <h3 class="text-red-500">{{ $messages }}</h3>
     @endisset
