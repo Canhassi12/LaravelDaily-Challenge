@@ -26,7 +26,7 @@ class CompanyStoreRequest extends FormRequest
         return [
             'name' => 'required|string|',
             'email' => 'required|string|email|unique:companies',
-            'logotipo' => 'required',
+            'logotipo' => 'required|image|',
         ];
     }
 }

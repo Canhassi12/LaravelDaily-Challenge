@@ -35,16 +35,18 @@
                 @isset($companies) 
                     <table class="table-auto">
                         <tr>
+                            <th>logotipo</th>
                             <th>Company</th>
                             <th>Email</th>
-                            <th>logotipo</th>
                         </tr>
                         
                         @foreach ($companies as $company)
-                            <tr>
+                        <tr>
+                                <td>
+                                    <img class="text-center border w-[7.5rem] p-1" src="{{asset('storage/logotipos/'.$company->logotipo)}}">
+                                </td>
                                 <td class="text-center border p-1"> {{ $company->name }}</td>
                                 <td class="text-center border p-1">{{ $company->email }}</td>
-                                <td class="text-center border  p-1">{{ $company->logotipo}}</td>
                                 <td class="text-center border p-1">
                                     <a href="{{route('company.edit', $company->id) }}">
                                         <button class="text-blue-500 hover:text-blue-900">edit</button>

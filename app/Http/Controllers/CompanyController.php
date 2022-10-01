@@ -8,6 +8,7 @@ use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends Controller
@@ -15,15 +16,19 @@ class CompanyController extends Controller
     
     public function index()
     {
-        return view('company', ['companies' => DB::table('companies')->paginate(10)]);
+        return view('company', ['companies' => DB::table('companies')->paginate(10)]); 
     }
     
     public function store(CompanyStoreRequest $request)
     {
-        $company = $request->all();
-        
+        $request->logotipo->store('logotipos', 'public');
+
         try {
-            $company = Company::create($company);
+            Company::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'logotipo' => $request->logotipo->hashName(),
+            ]);
     
             return redirect('/company');
         } catch (Exception $error) {
@@ -37,12 +42,15 @@ class CompanyController extends Controller
     }
 
     public function update(CompanyUpdateRequest $request, Company $company)
-    {
-        $inputs = $request->except(['_token', '_method']);
-        
-        $company->fill(collect($inputs)->toArray());
+    {    
+        $request->logotipo->store('logotipos', 'public');
 
-        $company->save();
+        File::delete(public_path('storage/logotipos/'.$company->logotipo));        
+        $company->update([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'logotipo' => $request->logotipo->hashName(),
+        ]);
 
         return redirect('/company');
     }
