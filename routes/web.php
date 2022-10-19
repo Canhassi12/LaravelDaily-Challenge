@@ -22,6 +22,6 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('company', CompanyController::class)->names(['company']);
+Route::resource('company', CompanyController::class)->names(['company'])->middleware(['auth']);
 
-Route::resource('employee', EmployeeController::class)->names(['employee']);
+Route::resource('employee', EmployeeController::class)->names(['employee'])->middleware(['auth']);
