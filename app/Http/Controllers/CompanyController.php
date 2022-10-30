@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CompanyStoreRequest;
 use App\Http\Requests\CompanyUpdateRequest;
 use App\Models\Company;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends Controller
 {
-    
     public function index()
     {
         return view('company', ['companies' => DB::table('companies')->paginate(10)]); 
@@ -21,6 +21,8 @@ class CompanyController extends Controller
     
     public function store(CompanyStoreRequest $request)
     {
+        $this->authorize('create', Company::class);
+
         $request->logotipo->store('logotipos', 'public');
 
         try {
@@ -38,11 +40,15 @@ class CompanyController extends Controller
 
     public function edit(Company $company)
     {
+        $this->authorize('update', Company::class);
+
         return view('edit-company', compact('company'));
     }
 
     public function update(CompanyUpdateRequest $request, Company $company)
     {    
+        $this->authorize('update', Company::class);
+
         $request->logotipo->store('logotipos', 'public');
 
         File::delete(public_path('storage/logotipos/'.$company->logotipo));        
@@ -57,6 +63,8 @@ class CompanyController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Company::class);
+
         Company::where('id', $id)->delete();
         
         return redirect('/company');

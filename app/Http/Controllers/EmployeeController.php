@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
-use App\Models\Company;
 use App\Models\Employee;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeController extends Controller
@@ -24,6 +21,9 @@ class EmployeeController extends Controller
 
     public function store(EmployeeStoreRequest $request)
     {
+
+        $this->authorize('create', Employee::class);
+
         $employee = $request->all();
 
         try {
@@ -37,12 +37,16 @@ class EmployeeController extends Controller
  
     public function edit(Employee $employee)
     {
+        $this->authorize('update', Employee::class);
+
         return view('edit-employee', ['employee' => $employee, 'companies' => DB::table('companies')->get()]);
     }
 
    
     public function update(EmployeeUpdateRequest $request, Employee $employee)
     {
+        $this->authorize('update', Employee::class);
+
         $inputs = $request->except(['_token', '_method']);
         
         $employee->fill(collect($inputs)->toArray());
@@ -55,6 +59,8 @@ class EmployeeController extends Controller
     
     public function destroy($id)
     {
+        $this->authorize('delete', Employee::class);
+
         Employee::where('id', $id)->delete();
         
         return redirect('/employee');
