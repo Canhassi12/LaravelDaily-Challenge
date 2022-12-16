@@ -1,4 +1,4 @@
-# LaravelDaily-Challenge 🎌🥵
+# LaravelDaily-Challenge 
 
 ## Run this project steps
 
